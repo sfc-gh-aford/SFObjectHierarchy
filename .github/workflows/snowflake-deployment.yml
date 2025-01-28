@@ -37,5 +37,5 @@ jobs:
         run: snow git fetch "${REPO_NAME}"
 
       - name: Deploy scripts to preprod environment
-        run: snow git execute "${REPO_NAME}/branches/main/devops/*" \
+        run: snow git execute "${REPO_NAME}/branches/main/devops/" \
             -D "env='preprod'"
