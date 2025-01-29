@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'deployment/current/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -37,4 +39,4 @@ jobs:
         run: snow git fetch "${REPO_NAME}"
 
       - name: Deploy scripts to preprod environment
-        run: snow git execute "@${REPO_NAME}/branches/main/devops/*" -D "env='preprod'"
+        run: snow git execute "@${REPO_NAME}/branches/main/deploy/current/*" -D "env='preprod'"
