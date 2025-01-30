@@ -33,5 +33,14 @@ jobs:
       - name: Fetch repository changes
         run: snow git fetch "${REPO_NAME}"
 
-      - name: Deploy scripts to preprod environment
+      # Deploy scripts in Snowflake
+      - name: Deploy scripts to production environment
         run: snow git execute "@${REPO_NAME}/branches/main/deployment/current/*" -D "env='prod'" -D "git_db='common'" -D "git_sc='common'"
+
+      # Archive deployment scripts
+      - name: Archive deployment scripts
+        run: | 
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "Archiving deployment scripts"
+          git mv $GITHUB_WORKSPACE/deployment/current/* $GITHUB_WORKSPACE/deployment/archive/*
+          git commit -am "Archived deployment scripts"
