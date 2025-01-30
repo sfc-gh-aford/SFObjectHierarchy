@@ -1,4 +1,4 @@
-name: Deploy snowflake scripts to preprod
+name: Deploy snowflake scripts to production
 
 # Action will run manualy only
 on:
