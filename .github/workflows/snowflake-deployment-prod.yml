@@ -42,5 +42,5 @@ jobs:
         run: | 
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           echo "Archiving deployment scripts"
-          git mv $GITHUB_WORKSPACE/deployment/current/* $GITHUB_WORKSPACE/deployment/archive/*
+          git mv $GITHUB_WORKSPACE/deployment/current/* $GITHUB_WORKSPACE/deployment/archive
           git commit -am "Archived deployment scripts"
