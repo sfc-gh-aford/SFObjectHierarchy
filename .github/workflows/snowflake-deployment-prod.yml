@@ -1,0 +1,37 @@
+name: Deploy snowflake scripts to preprod
+
+# Action will run manualy only
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      REPO_NAME: "git_repo"
+      # Read connection secrets
+      SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+      SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SF_USERNAME }}
+      SNOWFLAKE_CONNECTIONS_DEFAULT_PASSWORD: ${{ secrets.SF_PASSWORD }}
+
+    steps:
+      # Checkout step is necessary if you want to use a config file from your repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install Snowflake CLI GitHub Action and point to config file
+      - name: Install snowflake-cli
+        uses: Snowflake-Labs/snowflake-cli-action@v1.5
+        with:
+          cli-version: "latest"
+          default-config-file-path: ".snowflake/config.toml"
+
+      # Update Snowflake's copy of the repository
+      - name: Fetch repository changes
+        run: snow git fetch "${REPO_NAME}"
+
+      - name: Deploy scripts to preprod environment
+        run: snow git execute "@${REPO_NAME}/branches/main/deployment/current/*" -D "env='prod'" -D "git_db='common'" -D "git_sc='common'"
