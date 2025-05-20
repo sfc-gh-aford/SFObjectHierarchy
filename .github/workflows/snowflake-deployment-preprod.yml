@@ -40,4 +40,4 @@ jobs:
 
       # Deploy scripts in Snowflake
       - name: Deploy scripts to preprod environment
-        run: snow git execute "@${REPO_NAME}/branches/main/deployment/current/*" -D "env='preprod'" -D "git_db='common'" -D "git_sc='common'"
+        run: snow git execute "@${REPO_NAME}/branches/main/deployment/current/*" -D "env='preprod'" -D "git_db='common'" -D "git_sc='public'"
