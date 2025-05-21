@@ -1,7 +1,0 @@
-[connections.default]
-warehouse = "ALF_WH"
-role = "ACCOUNTADMIN"
-database = "COMMON"
-schema = "PUBLIC"
-account = "sfpscogs-alf_aws_irelend"
-user = "ALF"

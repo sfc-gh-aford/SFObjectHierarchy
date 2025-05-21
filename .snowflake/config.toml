@@ -1,7 +1,7 @@
 [connections.default]
-warehouse = "DEVOPS_WH"
-role = "DEVOPS_ROLE"
+warehouse = "ALF_WH"
+role = "ACCOUNTADMIN"
 database = "COMMON"
-schema = "DEPLOYMENT"
+schema = "PUBLIC"
 account = "sfpscogs-alf_aws_irelend"
-user = "DEVOPS_USER"
+user = "ALF"
