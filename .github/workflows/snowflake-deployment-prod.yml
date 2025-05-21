@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO_NAME: "git_repo"
+      REPO_NAME: "common.public.git_repo"
       # Read connection secrets
       SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
       SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SF_USERNAME }}
@@ -33,6 +33,10 @@ jobs:
       - name: Fetch repository changes
         run: snow git fetch "${REPO_NAME}"
 
-      # Deploy scripts in Snowflake
-      - name: Deploy scripts to production environment
-        run: snow git execute "@${REPO_NAME}/branches/main/deployment/current/*" -D "env='prod'" -D "git_db='common'" -D "git_sc='common'"
+      # Deploy environment specific scripts in Snowflake
+      - name: Deploy environment specific scripts to production environment
+        run: snow git execute "@${REPO_NAME}/branches/main/devops/environment/*" -D "env='prod'" -D "git_db='common'" -D "git_sc='public'"
+
+      # Deploy common scripts in Snowflake
+      - name: Deploy common scripts to production environment     
+        run: snow git execute "@${REPO_NAME}/branches/main/devops/common/*" -D "git_db='common'" -D "git_sc='public'"

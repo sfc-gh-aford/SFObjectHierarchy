@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'devops/**'
+      - 'devops/environment/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,6 +38,6 @@ jobs:
       - name: Fetch repository changes
         run: snow git fetch "${REPO_NAME}"
 
-      # Deploy scripts in Snowflake
-      - name: Deploy scripts to UAT environment
-        run: snow git execute "@${REPO_NAME}/branches/main/devops/*" -D "env='uat'" -D "git_db='common'" -D "git_sc='public'"
+      # Deploy environment specific scripts in Snowflake
+      - name: Deploy environment specific scripts to UAT environment
+        run: snow git execute "@${REPO_NAME}/branches/main/devops/environment/*" -D "env='uat'" -D "git_db='common'" -D "git_sc='public'"
