@@ -16,8 +16,3 @@ create or alter table voucher (
 	v_iso_id number,
 	primary key (v_iso_id, v_number)
 );
-
--- tag passport number column
-alter table voucher 
-    modify column v_passport_no 
-    set tag common.governance.passport_number_tag = 'sensitive_passport';

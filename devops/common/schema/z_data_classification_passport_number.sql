@@ -9,7 +9,12 @@ as (val string) returns string ->
   end;
 
 -- create a tag for passport number
-create or replace tag common.governance.passport_number_tag;
+create or alter tag common.governance.passport_number_tag;
 
 -- associate tag with masking policy for passport number
 alter tag common.governance.passport_number_tag set masking policy common.governance.passport_number_mask;
+
+-- tag passport number column
+alter table rawdata.traveller.voucher 
+    modify column v_passport_no 
+    set tag common.governance.passport_number_tag = 'sensitive_passport';
