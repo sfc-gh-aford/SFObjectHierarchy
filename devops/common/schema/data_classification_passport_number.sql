@@ -5,9 +5,6 @@ alter table rawdata.traveller.voucher
     modify column v_passport_no 
     unset tag common.governance.passport_number_tag;
 
--- create a tag for passport number
-create or alter tag common.governance.passport_number_tag;
-
 -- create masking poilicy to mask passport number
 create or replace masking policy common.governance.passport_number_mask
 as (val string) returns string ->
@@ -16,6 +13,8 @@ as (val string) returns string ->
     else '***MASKED***'
   end;
 
+-- create a tag for passport number
+create or alter tag common.governance.passport_number_tag;
+
 -- associate tag with masking policy for passport number
 alter tag common.governance.passport_number_tag set masking policy common.governance.passport_number_mask;
-
