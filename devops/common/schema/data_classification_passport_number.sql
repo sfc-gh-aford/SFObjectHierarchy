@@ -1,7 +1,7 @@
 -- script to classify passport number in raw_data database
 
 -- unset dependant objects using the tag
-alter table voucher 
+alter table rawdata.traveller.voucher 
     modify column v_passport_no 
     unset tag passport_number_tag;
 
