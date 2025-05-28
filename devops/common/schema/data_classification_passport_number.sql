@@ -1,5 +1,10 @@
 -- script to classify passport number in raw_data database
 
+-- unset dependent 
+alter table voucher 
+    modify column v_passport_no 
+    unset tag common.governance.passport_number_tag;
+
 -- create a tag for passport number
 create or alter tag common.governance.passport_number_tag;
 
@@ -14,7 +19,3 @@ as (val string) returns string ->
 -- associate tag with masking policy for passport number
 alter tag common.governance.passport_number_tag set masking policy common.governance.passport_number_mask;
 
--- tag passport number column
-alter table rawdata.traveller.voucher 
-    modify column v_passport_no 
-    set tag common.governance.passport_number_tag = 'sensitive_passport';
