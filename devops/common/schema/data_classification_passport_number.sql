@@ -3,7 +3,7 @@
 -- unset dependant objects using the tag
 alter table rawdata.traveller.voucher 
     modify column v_passport_no 
-    unset tag passport_number_tag;
+    unset tag common.governance.passport_number_tag;
 
 -- create a tag for passport number
 create or alter tag common.governance.passport_number_tag;
