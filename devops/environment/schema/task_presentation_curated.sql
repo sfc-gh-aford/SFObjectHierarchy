@@ -10,3 +10,6 @@ create or alter task {{env}}_presentation.curated.test_task
   user_task_managed_initial_warehouse_size = 'XSMALL'
   as
     select current_timestamp;
+
+-- resume test task
+alter task {{env}}_presentation.curated.test_task resume;
