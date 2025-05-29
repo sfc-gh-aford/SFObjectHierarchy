@@ -1,6 +1,9 @@
 -- script to create tasks in env_presentation.curated schema
 -- env variable to be provided by snowflake-deployment.yml
 
+-- suspend test task
+alter task {{env}}_presentation.curated.test_task suspend;
+
 -- create test task
 create or alter task {{env}}_presentation.curated.test_task
   schedule = 'USING CRON 0 0 1 * * UTC' 
@@ -9,4 +12,4 @@ create or alter task {{env}}_presentation.curated.test_task
     select current_timestamp;
 
 -- resume test task
-alter task {{env}}_presentation.curated.test_task suspend;
+alter task {{env}}_presentation.curated.test_task resume;
