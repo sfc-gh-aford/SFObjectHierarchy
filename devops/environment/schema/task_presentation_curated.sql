@@ -9,4 +9,4 @@ create or alter task {{env}}_presentation.curated.test_task
     select current_timestamp;
 
 -- resume test task
-alter task {{env}}_presentation.curated.test_task resume;
+alter task {{env}}_presentation.curated.test_task suspend;
